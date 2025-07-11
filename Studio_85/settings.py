@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-n_t^ab*&ci#l7&8=!+!-25+_0ph&3bq!&w0haxn4wk#db9i0no'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 import os
-ALLOWED_HOSTS = ['*'] if DEBUG else [os.environ.get('RENDER_EXTERNAL_HOSTNAME', '')]
+ALLOWED_HOSTS = ['studio85.in', 'www.studio85.in', '103.180.213.247']
 
 
 
@@ -151,8 +151,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # settings.py
 from django.urls import path, include
 
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 # urls.py (root urls.py)
 from django.conf import settings
@@ -172,4 +175,3 @@ urlpatterns = [
     # ... your existing paths
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-ALLOWED_HOSTS = ['studio85.in', 'www.studio85.in', '103.180.213.247']
