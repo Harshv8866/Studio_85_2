@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Media - {{ service.name }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="mb-4">Upload Media for <strong>{{ service.name }}</strong></h2>
+
+    <!-- Upload Form -->
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label for="caption" class="form-label">Caption (e.g., Chhagan weds Riya)</label>
+        <input type="text" class="form-control" name="caption" placeholder="Enter caption">
+      </div>
+
+      <div class="mb-3">
+        <label for="media" class="form-label">Select Images/Videos</label>
+        <input type="file" class="form-control" name="media" multiple required>
+      </div>
+
+      <button type="submit" class="btn btn-success">Upload</button>
+      <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- Uploaded Media Display -->
+    <h5 class="mb-3">Uploaded Media</h5>
+    <div class="row">
+      {% for media in service.media.all %}
+        <div class="col-md-3 mb-4">
+          <div class="border p-2 bg-white rounded shadow-sm">
+            {% if media.media_file.url|lower endswith '.mp4' %}
+              <video width="100%" controls class="mb-2">
+                <source src="{{ media.media_file.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            {% else %}
+              <img src="{{ media.media_file.url }}" class="img-fluid rounded shadow mb-2">
+            {% endif %}
+            {% if media.caption %}
+              <p class="text-muted small mb-0 text-center"><strong>{{ media.caption }}</strong></p>
+            {% endif %}
+          </div>
+        </div>
+      {% empty %}
+        <p>No media uploaded yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+</html>
