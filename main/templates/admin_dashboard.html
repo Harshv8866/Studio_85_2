@@ -746,6 +746,11 @@
 
 
 
+  <div id="loading-spinner" style="display: none;">
+    <div class="spinner-overlay">
+      <div class="spinner"></div>
+    </div>
+  </div>
 
 
   <!-- Section Toggle -->
@@ -808,15 +813,19 @@
   </script>
 
   <script>
-    // Show spinner on form submit
-    document.addEventListener('DOMContentLoaded', () => {
-      const forms = document.querySelectorAll("form");
-      forms.forEach(form => {
-        form.addEventListener('submit', () => {
-          document.getElementById("loading-spinner").style.display = "block";
-        });
-      });
+document.addEventListener('DOMContentLoaded', () => {
+  const forms = document.querySelectorAll("form");
+
+  forms.forEach(form => {
+    // Skip forms that use deleteMedia (AJAX forms)
+    if (form.onsubmit && form.onsubmit.toString().includes('deleteMedia')) return;
+
+    form.addEventListener('submit', () => {
+      document.getElementById("loading-spinner").style.display = "block";
     });
+  });
+});
+
   </script>
 
 </body>
