@@ -24,7 +24,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Must be above others for static
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For serving static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -38,7 +38,7 @@ ROOT_URLCONF = 'Studio_85.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],  # You can add templates folder here if needed
+        'DIRS': [],  # Add your template paths if needed
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -46,7 +46,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'main.context_processors.services_list',  # your custom context
+                'main.context_processors.services_list',  # Custom context
             ],
         },
     },
@@ -54,7 +54,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Studio_85.wsgi.application'
 
-# Database using dj_database_url (supports SQLite, Postgres, etc.)
+# Database configuration
 DATABASES = {
     'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
@@ -77,16 +77,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'  # Set your timezone
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JS, etc.)
+# Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files (user uploads)
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
