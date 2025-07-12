@@ -175,3 +175,26 @@ urlpatterns = [
     # ... your existing paths
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+
+
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Static files (CSS, JS)
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Media files (uploads like images/videos)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+# Use whitenoise to serve static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Allowed hosts
+ALLOWED_HOSTS = ['studio85.in', 'www.studio85.in', '103.180.213.247']
+
+# Debug should be False in production
+DEBUG = False
