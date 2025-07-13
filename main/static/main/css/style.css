@@ -1,0 +1,688 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFF0D1;
+    color: #3B3030;
+}
+.navbar-transparent {
+  background-color: transparent !important;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.navbar-color{
+  background-color: #3B3030;
+
+}
+
+.logo{
+  height: 70px;
+  width: auto;
+}
+
+
+.site-header {
+    background-color: #795757;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFF0D1;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #FFF0D1;
+}
+
+.nav-links a:hover {
+    color: #FFDAB9;
+}
+
+main {
+    padding: 2rem;
+}
+
+  /* Smooth Dropdown Animation */
+
+/* footer */
+.studio-footer {
+  background-color: #1e1c1a;
+  color: #fff;
+  padding: 60px 20px 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  gap: 30px;
+}
+
+.footer-logo-section {
+  flex: 1 1 300px;
+}
+
+.footer-logo {
+  height: 70px;
+  margin-bottom: 15px;
+}
+
+
+.footer-tagline {
+  font-size: 14px;
+  color: #ccc;
+  max-width: 250px;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  gap: 40px;
+  flex: 2 1 600px;
+  flex-wrap: wrap;
+}
+
+.footer-column h5 {
+  font-size: 16px;
+  color: #FFDDAA;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  color: #bbb;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #FFDDAA;
+}
+
+.subscribe-form {
+  display: flex;
+  border: 1px solid #FFDDAA;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.subscribe-form input {
+  border: none;
+  padding: 10px 15px;
+  flex: 1;
+  background-color: transparent;
+  color: white;
+  font-size: 14px;
+}
+
+.subscribe-form input::placeholder {
+  color: #ccc;
+}
+
+.subscribe-form button {
+  background-color: #FFDDAA;
+  color: #1e1c1a;
+  border: none;
+  padding: 0 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.footer-bottom {
+  border-top: 1px solid #444;
+  margin-top: 40px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  color: #FFDDAA;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.social-icons a:hover {
+  color: #fff;
+}
+
+
+/* footer in mobile screen */
+
+
+
+/* ............................home page style....................................................... */
+
+
+.video-background {
+  position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1;
+}
+
+.video-background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.overlay-content {
+  position: relative;
+  padding: 100px 20px 40px;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.4); /* Optional dark overlay */
+}
+
+.video-background::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.233); /* dark overlay */
+  z-index: 1;
+}
+
+
+.awards-section h5 {
+  color: #664343;
+  letter-spacing: 0.5px;
+}
+
+.awards-section p {
+  color: #795757;
+}
+
+
+.after-video-section {
+  background-color: #FFF0D1;
+  position: relative;
+  z-index: 2;
+  margin-top: 100vh; /* Ensures it comes after the full-screen fixed video */
+}
+
+
+.feature-image {
+  height: 150px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+
+.feature-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(123, 90, 72, 0);
+}
+
+.font{
+
+  font-family: "Paprika", system-ui;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+.fonts{
+font-family: "Cinzel", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.fonts2{
+ 
+  font-family: "Lexend Tera", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  text-transform: uppercase;
+    line-height: 1.6;
+
+  font-style: normal;
+
+}
+
+.section-divider {
+  width: 0;
+  height: 4px;
+  background: linear-gradient(to right, #795757, #664343, #3B3030);
+  margin: 0 auto;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+
+.section-divider.animate {
+  width: 100%;
+}
+
+.swiper-slide img {
+  margin: 0; /* no gap */
+  padding: 0;
+
+}
+
+
+
+
+
+.slider-wrapper {
+  margin-left: -2rem;
+  margin-right: -2rem;
+}
+
+
+.slider-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: 60px;
+  margin-left: -2rem !important;
+  margin-right: -2rem !important;
+}
+
+.slider-background-clip {
+  background-color: #3B3030; /* or #795757 or any of your theme colors */
+  clip-path: polygon(50% 0, 100% 18%, 100% 100%, 0 100%, 0 18%);
+  padding: 30px 0px;
+  position: relative;
+  z-index: 1;
+}
+
+.slider-section {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* about */
+
+
+.about-section {
+  background-image: url("/static/main/images/bg2.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #3B3030;
+  font-family: "Arial", sans-serif;
+   margin-left: -2rem !important;
+  margin-right: -2rem !important;
+}
+
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #FFDAB9;
+  letter-spacing: 1px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: #FFF0D1;
+  letter-spacing: 1px;
+}
+
+.about-box {
+  background-color:#fff7e6; 
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 900px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.about-box p {
+  margin-bottom: 1rem;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  align-items: center;
+  margin: 3rem 0;
+}
+
+.about-image img {
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+.about-text {
+  flex: 1;
+}
+
+/* 1) Ensure the wrapper clips overflow and has the same rounding */
+.img-wrapper {
+  width: 100%;
+  max-width: 500px;    /* adjust to your layout */
+  border-radius: 20px; /* same as you used before */
+  overflow: hidden;     /* hide the parts of the img that overflow */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 0 auto;       /* center if needed */
+}
+
+/* 2) Make the image fill the wrapper and enable smooth scaling */
+.img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+/* 3) On hover of the wrapper, zoom the img */
+.img-wrapper:hover img {
+  transform: scale(1.10); /* or 1.1 for a stronger zoom */
+}
+
+
+
+.instagram-section {
+  padding: 4rem 2rem;
+  background-color: #FFF0D1;
+  text-align: center;
+}
+
+.instagram-section .section-title {
+  font-family: 'Cinzel', serif;
+  color: #3B3030;
+  margin-bottom: 1rem;
+}
+
+.instagram-grid  {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 1rem;
+  max-width: 1000px;
+  margin: 0 auto 2rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) and (min-width: 768px) {
+  .instagram-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 767px) {
+  .instagram-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* margin-left: auto; */
+    margin: auto ;
+    width: 330px;
+  }
+  .instagram-section {
+  padding: 0px;
+  background-color: #FFF0D1;
+  text-align: center;
+}
+}
+
+/* Image container */
+.insta-tile {
+  display: block;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Image style and zoom effect */
+.insta-tile video,img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.insta-tile:hover img {
+  transform: scale(1.05);
+}
+
+.media-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.media-wrapper img,
+.media-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: opacity 0.4s ease;
+}
+
+/* video hidden by default */
+.media-wrapper video {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* on hover: fade in video */
+.insta-tile:hover .media-wrapper video {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.show-more-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.show-more-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #3B3030;
+  transition: transform 0.3s ease;
+}
+
+.show-more-btn:hover {
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .video-background {
+    height: 50vh; /* Reduce height on mobile */
+  }
+
+  .video-background video {
+    height: 50vh;
+  }
+
+  .overlay-content {
+    padding: 60px 20px 30px; /* Optional: adjust padding */
+  }
+
+  .after-video-section {
+    margin-top: 50vh; /* Match the reduced video height */
+  }
+  .slider-background-clip {
+  background-color: #3B3030; /* or #795757 or any of your theme colors */
+  clip-path: polygon(50% 5%, 100% 10%, 100% 100%, 0 100%, 0 10%);
+  padding: 30px 0px;
+  position: relative;
+  z-index: 1;
+}
+.about-section {
+  background-image: url("/static/main/images/MOBILE-BG2.png");
+  background-size: contain;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #3B3030;
+  font-family: "Arial", sans-serif;
+   margin-left: -2rem !important;
+  margin-right: -2rem !important;
+}
+}
+
+
+  @media (max-width: 900px) {
+    .navbar-collapse {
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      background-color: #3b303073; /* match your dark theme */
+      z-index: 9999;
+      padding: 10px 0;
+    }
+
+    .navbar-nav .nav-item {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+  }
+
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background-color: #3B3030;
+  color: #FFDDAA !important;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+    text-decoration: none;
+  color: inherit;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+/* Fix footer logo size on iPads and tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .studio-footer .footer-logo {
+    height: 50px !important;
+    width: auto !important;
+    margin-bottom: 12px;
+  }
+
+  .studio-footer .footer-tagline {
+    font-size: 13px;
+    max-width: 220px;
+  }
+
+  .studio-footer .footer-column h5 {
+    font-size: 15px;
+  }
+
+  .studio-footer .footer-column ul li a {
+    font-size: 14px;
+  }
+
+  .studio-footer .subscribe-form input {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .studio-footer .subscribe-form button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #FFF0D1 !important;
+
+  top: 50%;
+  position: absolute; /* required for Swiper */
+  z-index: 10;
+
+  transition: all 0.3s ease;
+}
+
+/* Optional: Hover effect */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform:scale(1.05)
+}
+
+/* Override Swiper's pseudo-elements */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff0d1b0;
+}
+
+

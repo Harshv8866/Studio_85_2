@@ -1,0 +1,824 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/a3d30df034.js" crossorigin="anonymous"></script>
+  <title>Admin Dashboard | Studio_85</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #3B3030;
+      color: #FFF0D1;
+      padding-top: 60px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      background-color: #664343;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .topbar .logo img {
+      height: 60px !important;
+    }
+
+    .logout-btn {
+      background-color: #795757;
+      color: #FFF0D1;
+      padding: 8px 16px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+    }
+
+    .sidebar-toggle {
+      display: none;
+      background: #795757;
+      color: #FFF0D1;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: #5C3F3F;
+      padding-top: 20px;
+      position: fixed;
+      top: 70px;
+      bottom: 0;
+      left: 0;
+      transition: left 0.3s ease;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px 20px;
+      color: #FFF0D1;
+      text-decoration: none;
+      border-bottom: 1px solid #795757;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 30px;
+      flex: 1;
+      transition: margin-left 0.3s ease;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .form-group {
+      max-width: 500px;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+
+    .form-group select,
+    .form-group input[type="file"],
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      background-color: #fcecc4;
+      border: none;
+      color: #3B3030;
+    }
+
+    form button {
+      padding: 8px 16px;
+      background: #795757;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .media-group {
+      margin-bottom: 30px;
+    }
+
+    .media-title {
+      margin: 20px 0 10px;
+      font-size: 18px;
+      color: #ffe4b5;
+      border-bottom: 1px solid #795757;
+      padding-bottom: 5px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .media-item {
+      position: relative;
+      border: 2px solid #FFF0D1;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #4a3b3b;
+      text-align: center;
+    }
+
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .media-item form {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+
+    .media-item button {
+      background: #FFF;
+      color: #260707;
+      border: none;
+      padding: 4px 7px;
+      border-radius: 4px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .caption-text {
+      margin-top: 5px;
+      padding-bottom: 5px;
+      font-size: 12px;
+      color: #ffe4b5;
+    }
+
+    .inquiry-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+      background-color: #4a3b3b;
+      color: #FFF0D1;
+      border: 1px solid #795757;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .inquiry-table th,
+    .inquiry-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #795757;
+    }
+
+    .inquiry-table th {
+      background-color: #664343;
+      font-weight: bold;
+    }
+
+    .inquiry-table tr:nth-child(even) {
+      background-color: #3B3030;
+    }
+
+    .inquiry-table tr:hover {
+      background-color: #5c3f3f;
+    }
+
+    /* Mobile view adjustments */
+    @media (max-width: 768px) {
+      .sidebar {
+        left: -220px;
+        z-index: 999;
+      }
+
+      .sidebar.open {
+        left: 0;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .sidebar-toggle {
+        display: block;
+      }
+
+      body {
+        flex-direction: column;
+      }
+    }
+
+    .category-row {
+      margin-bottom: 12px;
+    }
+
+    .category-input {
+      width: 250px;
+      padding: 8px 12px;
+      border: 1px solid #795757;
+      border-radius: 5px;
+      background-color: #fcecc4;
+      color: #3B3030;
+      font-size: 15px;
+      margin-right: 10px;
+    }
+
+    .rename-btn {
+      padding: 8px 14px;
+      background-color: #795757;
+      color: #FFF0D1;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .rename-btn:hover {
+      background-color: #664343;
+    }
+
+    .topbar .logo img {
+      height: 40px;
+      object-fit: contain;
+    }
+
+    form input[type="file"]::file-selector-button {
+      background: #795757;
+      color: #FFF0D1;
+      border: none;
+      padding: 6px 12px;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    form input[type="file"] {
+      padding: 6px;
+      background-color: #fcecc4;
+      color: #3B3030;
+      border-radius: 4px;
+    }
+
+    h3,
+    h4,
+    h5 {
+      margin-bottom: 10px;
+      color: #FFF0D1;
+      border-bottom: 2px solid #795757;
+      padding-bottom: 4px;
+    }
+
+    button:hover,
+    .logout-btn:hover,
+    .rename-btn:hover {
+      background-color: #5c3f3f;
+    }
+
+
+    .upload-form {
+      background-color: #4a3b3b;
+      border: 1px solid #795757;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .upload-form .form-group {
+      margin-bottom: 20px;
+    }
+
+    .upload-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #FFF0D1;
+    }
+
+    .upload-form select,
+    .upload-form input[type="text"],
+    .upload-form input[type="file"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1px solid #795757;
+      background-color: #fcecc4;
+      color: #3B3030;
+      transition: 0.2s ease-in-out;
+    }
+
+    .upload-form input[type="file"]::file-selector-button {
+      background: #795757;
+      color: #FFF0D1;
+      border: none;
+      padding: 6px 12px;
+      margin-right: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .upload-form select:focus,
+    .upload-form input[type="text"]:focus,
+    .upload-form input[type="file"]:focus {
+      outline: none;
+      border-color: #FFF0D1;
+      background-color: #fff6d5;
+    }
+
+    .upload-form button[type="submit"] {
+      background-color: #795757;
+      color: #FFF0D1;
+      padding: 10px 18px;
+      font-size: 15px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .upload-form button[type="submit"]:hover {
+      background-color: #664343;
+    }
+
+    /* Section Title for Uploaded Media */
+    h4 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffeac0;
+      margin: 30px 0 20px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid #795757;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Subsection Title for Each Service Name */
+    .media-group h5 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fddcb0;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      padding: 6px 12px;
+      background-color: #5C3F3F;
+      border-left: 5px solid #795757;
+      border-radius: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      display: inline-block;
+    }
+
+    #studio-contact {
+  background-color: #4a3b3b;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 40px 90px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+#studio-contact h3 {
+  font-size: 26px;
+  text-align: center;
+  color: #ffeac0;
+  border-bottom: 2px solid #795757;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+#studio-contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#studio-contact form p {
+  margin-bottom: 16px;
+}
+
+#studio-contact label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  display: block;
+  color: #FFF0D1;
+}
+
+#studio-contact input[type="text"],
+#studio-contact input[type="email"],
+#studio-contact textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #795757;
+  border-radius: 6px;
+  background-color: #fcecc4;
+  color: #3B3030;
+  font-size: 14px;
+}
+
+#studio-contact textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+#studio-contact button[type="submit"] {
+  background-color: #5c3f3f;
+  color: #FFF0D1;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#studio-contact button[type="submit"]:hover {
+  background-color: #795757;
+}
+
+
+    .popup-wrapper {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      animation: fadeSlideDown 0.5s ease-out;
+    }
+
+    .popup-message {
+      background-color: #4a3b3b;
+      color: #FFF0D1;
+      padding: 14px 26px;
+      border-radius: 10px;
+      font-weight: bold;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      border: 2px solid #795757;
+      text-align: center;
+      font-size: 16px;
+      min-width: 280px;
+    }
+
+    /* Fade and Slide Down Animation */
+    @keyframes fadeSlideDown {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    .spinner-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(59, 48, 48, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #795757;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .delete-button {
+      background-color: transparent;
+      color: #fddcb0;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="logo">
+      <img src="{% static 'main/images/logo.png' %}" alt="Logo">
+    </div>
+    <form method="POST" action="{% url 'admin_logout' %}">
+      {% csrf_token %}
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <a href="?section=category">Category</a>
+    <a href="?section=media">Images / Video</a>
+    <a href="?section=inquiries">Inquiries</a>
+    <a href="?section=studio-contact">Contact Info</a>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Category Section -->
+    <div id="category" class="section">
+      <h3 style="margin-bottom: 10px;">Manage Categories</h3>
+      {% for service in services %}
+      <div class="category-row">
+        <form method="POST" action="{% url 'rename_service' service.id %}">
+          {% csrf_token %}
+          <input type="text" name="new_name" value="{{ service.name }}" class="category-input">
+          <button type="submit" class="rename-btn">Rename</button>
+        </form>
+      </div>
+      {% endfor %}
+    </div>
+
+
+    <!-- Media Section -->
+    <div id="media" class="section">
+      <h3>Upload Images / Videos</h3>
+      <form method="POST" enctype="multipart/form-data" action="{% url 'upload_media' %}" class="upload-form">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="service-select">Select Service:</label>
+          <select id="service-select" name="service_id" required>
+            <option value="">-- Choose a service --</option>
+            {% for service in services %}
+            <option value="{{ service.id }}">{{ service.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="caption">Caption (optional):</label>
+          <input id="caption" type="text" name="caption" placeholder="e.g. Chhagan weds Riya">
+        </div>
+        <div class="form-group">
+          <label for="media-file">Choose File(s):</label>
+          <input id="media-file" type="file" name="media_file" multiple required>
+        </div>
+        <button type="submit">Upload</button>
+      </form>
+
+
+
+      <hr>
+      <h4>Uploaded Media</h4>
+
+      {% for service in services %}
+      <div class="media-group">
+        <h5>{{ service.name|title }}</h5>
+
+        <div class="media-title">Images:</div>
+        <div class="media-grid">
+          {% for media in service.media.all %}
+          {% with media.media_file.url|lower as url %}
+          {% if not url|slice:"-4:" == ".mp4" and not url|slice:"-5:" == ".webm" and not url|slice:"-4:" == ".mov" %}
+          <div class="media-item" id="media-{{ media.id }}">
+            <img src="{{ media.media_file.url }}" alt="Image">
+            {% if media.caption %}
+            <div class="caption-text">{{ media.caption }}</div>
+            {% endif %}
+            <form onsubmit="return deleteMedia('{{ media.id }}');">
+              <button type="submit">X</button>
+            </form>
+          </div>
+          {% endif %}
+          {% endwith %}
+          {% endfor %}
+        </div>
+
+        <div class="media-title">Videos:</div>
+        <div class="media-grid">
+          {% for media in service.media.all %}
+          {% with media.media_file.url|lower as url %}
+          {% if url|slice:"-4:" == ".mp4" or url|slice:"-5:" == ".webm" or url|slice:"-4:" == ".mov" %}
+          <div class="media-item" id="media-{{ media.id }}">
+            <video controls>
+              <source src="{{ media.media_file.url }}">
+            </video>
+            {% if media.caption %}
+            <div class="caption-text">{{ media.caption }}</div>
+            {% endif %}
+            <form onsubmit="return deleteMedia('{{ media.id }}');">
+              <button type="submit">X</button>
+            </form>
+          </div>
+          {% endif %}
+          {% endwith %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Inquiries Section -->
+    <div id="inquiries" class="section">
+      <h3 style="margin-bottom: 20px; font-size: 24px; text-align: center;">Contact Inquiries</h3>
+      <div style="max-width: 1000px; margin: auto;">
+        <table class="inquiry-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Inquiry</th>
+              <th>Date</th>
+              <th>Delete</th> <!-- New column for delete -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for msg in inquiries %}
+            <tr>
+              <td>{{ msg.name }}</td>
+              <td>{{ msg.email }}</td>
+              <td>{{ msg.mobile }}</td>
+              <td>{{ msg.inquiry }}</td>
+              <td>{{ msg.created_at|date:"d M Y H:i" }}</td>
+              <td>
+                <form method="POST" action="{% url 'delete_inquiry' msg.id %}">
+                  {% csrf_token %}
+                  <button type="submit" onclick="return confirm('Delete this inquiry?');" class="delete-button">
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="6" style="text-align: center;">No inquiries found.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div id="studio-contact" class="section">
+      <h3 style="margin-bottom: 20px; font-size: 24px; text-align: center;">Update Studio Contact</h3>
+      <form method="POST" style="max-width: 700px; margin: auto;">
+        {% csrf_token %}
+        <input type="hidden" name="update_contact" value="true">
+        
+        {{ contact_form.as_p }}
+    
+        <button type="submit" style="background: #5c3f3f; color: white; padding: 10px 20px; border: none; border-radius: 6px;">
+          Update Info
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Update Contact Info -->
+
+
+  {% if messages %}
+  <div class="popup-wrapper">
+    <div class="popup-message">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+    </div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      const popup = document.querySelector('.popup-wrapper');
+      if (popup) popup.style.display = 'none';
+    }, 3000);
+  </script>
+  {% endif %}
+
+
+
+
+
+  <!-- Section Toggle -->
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      const section = document.getElementById(id);
+      if (section) section.classList.add('active');
+    }
+
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      const section = params.get('section') || 'category';
+      showSection(section);
+    };
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("open");
+    }
+
+    function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+          cookie = cookie.trim();
+          if (cookie.startsWith(name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    function deleteMedia(mediaId) {
+      if (!confirm("Are you sure you want to delete this media?")) return false;
+      fetch(`/delete-media-ajax/${mediaId}/`, {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const el = document.getElementById(`media-${mediaId}`);
+            if (el) el.remove();
+          } else {
+            alert("Failed to delete media.");
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+          alert("Error deleting media.");
+        });
+      return false;
+    }
+  </script>
+
+  <script>
+    // Show spinner on form submit
+    document.addEventListener('DOMContentLoaded', () => {
+      const forms = document.querySelectorAll("form");
+      forms.forEach(form => {
+        form.addEventListener('submit', () => {
+          document.getElementById("loading-spinner").style.display = "block";
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
