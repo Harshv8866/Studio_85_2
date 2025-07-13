@@ -172,4 +172,4 @@ urlpatterns = [
     # ... your existing paths
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['103.180.213.247' , "studio85.in" , "www.studio85.in"]  
