@@ -196,7 +196,7 @@
       <div class="couple-caption">{{ group.grouper }}</div>
       <div class="media-grid">
         {% for item in group.list %}
-          {% with item.media_file.url|lower as url %}
+          {% with item.media_file.url as url %}
             {% with url|slice:"-4:" as ext %}
               <div class="media-item" onclick="openModal('{{ url }}', '{{ ext }}')">
                 <div class="media-inner">
@@ -237,9 +237,8 @@
     content.innerHTML = '';
 
     const closeBtn = document.createElement('span');
-closeBtn.className = 'modal-close';
-closeBtn.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>';
-
+    closeBtn.className = 'modal-close';
+    closeBtn.innerHTML = '<i class="fa-regular fa-circle-xmark"></i>';
     closeBtn.onclick = closeModal;
     content.appendChild(closeBtn);
 
