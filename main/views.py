@@ -82,12 +82,15 @@ def admin_dashboard(request):
 
 
 
+from django.http import JsonResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Service, ServiceMedia
 
 def upload_media(request):
     if not request.session.get('admin_logged_in'):
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': False, 'message': 'Unauthorized'}, status=403)
         return redirect('admin_login')
 
     if request.method == 'POST':
@@ -108,10 +111,16 @@ def upload_media(request):
                 caption=caption
             )
 
+        # ✅ If AJAX request, return JSON response
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'success': True, 'message': 'Media uploaded successfully.'})
+
+        # ✅ For normal form POST
         messages.success(request, "Media uploaded successfully.")
-        return redirect('/admin-dashboard/?section=media')  # ✅ go to media section
+        return redirect('/admin-dashboard/?section=media')
 
     return redirect('/admin-dashboard/?section=media')
+
 # Update Studio Contact Info
 
 

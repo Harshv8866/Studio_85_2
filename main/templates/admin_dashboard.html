@@ -593,27 +593,37 @@
     <!-- Media Section -->
     <div id="media" class="section">
       <h3>Upload Images / Videos</h3>
-      <form method="POST" enctype="multipart/form-data" action="{% url 'upload_media' %}" class="upload-form">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="service-select">Select Service:</label>
-          <select id="service-select" name="service_id" required>
-            <option value="">-- Choose a service --</option>
-            {% for service in services %}
-            <option value="{{ service.id }}">{{ service.name }}</option>
-            {% endfor %}
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="caption">Caption (optional):</label>
-          <input id="caption" type="text" name="caption" placeholder="e.g. Chhagan weds Riya">
-        </div>
-        <div class="form-group">
-          <label for="media-file">Choose File(s):</label>
-          <input id="media-file" type="file" name="media_file" multiple required>
-        </div>
-        <button type="submit">Upload</button>
-      </form>
+      <form id="media-upload-form" enctype="multipart/form-data" class="upload-form">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="service-select">Select Service:</label>
+    <select id="service-select" name="service_id" required>
+      <option value="">-- Choose a service --</option>
+      {% for service in services %}
+      <option value="{{ service.id }}">{{ service.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="caption">Caption (optional):</label>
+    <input id="caption" type="text" name="caption" placeholder="e.g. Chhagan weds Riya">
+  </div>
+  <div class="form-group">
+    <label for="media-file">Choose File(s):</label>
+    <input id="media-file" type="file" name="media_file" multiple required>
+  </div>
+  <button type="submit">Upload</button>
+</form>
+
+<!-- Upload Progress Modal -->
+<div id="upload-progress-modal" class="spinner-overlay" style="display:none;">
+  <div style="background: #4a3b3b; padding: 30px 40px; border-radius: 12px; text-align:center; color:#FFF0D1;">
+    <h3>Uploading...</h3>
+    <progress id="uploadProgress" value="0" max="100" style="width:300px;"></progress>
+    <p id="uploadPercentage">0%</p>
+  </div>
+</div>
+
 
 
 
@@ -818,6 +828,51 @@
       });
     });
   </script>
+  <script>
+  const uploadForm = document.getElementById("media-upload-form");
+  const modal = document.getElementById("upload-progress-modal");
+  const progressBar = document.getElementById("uploadProgress");
+  const percentText = document.getElementById("uploadPercentage");
+
+  uploadForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(uploadForm);
+    const xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "{% url 'upload_media' %}", true);
+    xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+
+    modal.style.display = "flex";
+
+    xhr.upload.onprogress = function (e) {
+      if (e.lengthComputable) {
+        const percent = Math.round((e.loaded / e.total) * 100);
+        progressBar.value = percent;
+        percentText.innerText = percent + "%";
+      }
+    };
+
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        modal.style.display = "none";
+        alert("Upload complete!");
+        window.location.reload(); // Refresh to see uploaded media
+      } else {
+        modal.style.display = "none";
+        alert("Upload failed. Please try again.");
+      }
+    };
+
+    xhr.onerror = function () {
+      modal.style.display = "none";
+      alert("Network error occurred.");
+    };
+
+    xhr.send(formData);
+  });
+</script>
+
 
 </body>
 
