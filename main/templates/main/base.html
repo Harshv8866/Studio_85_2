@@ -28,6 +28,57 @@
 
 <!-- Swiper JS (before </body>) -->
 
+<style>
+  /* WhatsApp Styles */
+#whatsapp-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+#whatsapp-button {
+  background-color: #3b3030;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
+  color: #ffddab;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+#whatsapp-popup {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+  padding: 10px;
+  text-align: left;
+  min-width: 200px;
+}
+
+#whatsapp-popup a {
+  display: block;
+  padding: 8px 10px;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+#whatsapp-popup a:last-child {
+  border-bottom: none;
+}
+
+#whatsapp-popup a:hover {
+  background: #f5f5f5;
+}
+
+</style>
 
 </head>
 
@@ -148,14 +199,32 @@
   </div>
 </footer>
 
-    <a href="https://wa.me/917405563004?text=Hello%20Studio%2085%2C%20I%20want%20to%20inquire%20about%20your%20photography%20services." 
-   class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp">
-  <!-- <img src="{% static 'main/images/whatsapp-icon.png' %}" alt="WhatsApp" /> -->
-   <i class="fa-brands fa-whatsapp"></i>
-</a>
+<!-- WhatsApp Floating Icon -->
+<div id="whatsapp-container">
+  <div id="whatsapp-popup">
+    <a href="https://wa.me/917405563004?text=Hello%20Studio%2085%2C%20I%20want%20to%20inquire%20about%20your%20photography%20services." target="_blank">
+      TEJ PARMAR
+    </a>
+    <a href="https://wa.me/918460815447?text=Hi%2C%20I%20am%20interested%20in%20Studio%2085%20services." target="_blank">
+      SIDHHESH PATEL
+    </a>
+  </div>
+
+  <button id="whatsapp-button" title="Chat with us on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </button>
+</div>
 
 
 
+<script>
+  // Toggle popup visibility
+document.getElementById("whatsapp-button").addEventListener("click", function () {
+  const popup = document.getElementById("whatsapp-popup");
+  popup.style.display = popup.style.display === "block" ? "none" : "block";
+});
+
+</script>
 </body>
 
 </html>

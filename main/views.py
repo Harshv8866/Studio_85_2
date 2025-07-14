@@ -197,24 +197,53 @@ def delete_media_ajax(request, media_id):
 
 from .models import StudioContact  # Make sure you import this at the top
 
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
+from django.conf import settings
 def contact(request):
-    contact_info = StudioContact.objects.first()  # Fetch contact details
+    contact_info = StudioContact.objects.first()
 
     if request.method == 'POST':
         form = ContactMessageForm(request.POST)
         if form.is_valid():
-            form.save()
+            contact_message = form.save()
+
+            # Prepare HTML email
+            subject = "📩 New Inquiry from Studio 85 Website"
+            from_email = settings.DEFAULT_FROM_EMAIL
+            to_email = ['ststudio85@gmail.com']
+
+            html_content = f"""
+            <div style="font-family: Arial, sans-serif; border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #fefefe;">
+              <h2 style="color: #795757;">📸 Studio 85 - New Inquiry Received</h2>
+              <hr style="margin: 10px 0;">
+              <p><strong>Name:</strong> {contact_message.name}</p>
+              <p><strong>Email:</strong> {contact_message.email}</p>
+              <p><strong>Mobile:</strong> {contact_message.mobile}</p>
+              <p><strong>Message:</strong><br>{contact_message.inquiry}</p>
+              <hr style="margin: 20px 0;">
+              <p style="font-size: 12px; color: #777;">Submitted on: {contact_message.created_at.strftime('%d %B %Y, %I:%M %p')}</p>
+            </div>
+            """
+
+            text_content = strip_tags(html_content)  # Fallback for email clients that don't support HTML
+
+            email = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
             return render(request, 'main/contact.html', {
-                'form': ContactMessageForm(), 
+                'form': ContactMessageForm(),
                 'success': True,
-                'contact_info': contact_info  # Pass to template
+                'contact_info': contact_info
             })
+
     else:
         form = ContactMessageForm()
 
     return render(request, 'main/contact.html', {
         'form': form,
-        'contact_info': contact_info  # Pass to template
+        'contact_info': contact_info
     })
 
 

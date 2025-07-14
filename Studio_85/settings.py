@@ -172,4 +172,15 @@ urlpatterns = [
     # ... your existing paths
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-ALLOWED_HOSTS = ['103.180.213.247' , "studio85.in" , "www.studio85.in"]  
+ALLOWED_HOSTS = ['103.180.213.247' , "studio85.in" , "www.studio85.in"] 
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ststudio85@gmail.com'
+EMAIL_HOST_PASSWORD = 'bmzu sjvo cajh hwsf'  # App password, not your real one
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
