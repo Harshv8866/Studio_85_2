@@ -211,7 +211,7 @@ def contact(request):
             # Prepare HTML email
             subject = "📩 New Inquiry from Studio 85 Website"
             from_email = settings.DEFAULT_FROM_EMAIL
-            to_email = ['ststudio85@gmail.com']
+            to_email = ['harshvaghela7265@gmail.com']
 
             html_content = f"""
             <div style="font-family: Arial, sans-serif; border: 1px solid #ddd; padding: 20px; border-radius: 10px; background-color: #fefefe;">
